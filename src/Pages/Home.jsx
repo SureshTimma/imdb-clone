@@ -24,12 +24,17 @@ const Home = () => {
     // console.log(movieData.results);
     setMovies(movieData.results);
   };
-  console.log(selectedGenre);
+
+  const filteredMovies = selectedGenre
+    ? movies.filter((movie) => movie.genre_ids.includes(selectedGenre))
+    : movies;
 
   useEffect(() => {
     fetchMovieDate();
     setIsLoading(false);
-  }, []);
+    console.log(selectedGenre);
+    console.log(filteredMovies);
+  }, [selectedGenre]);
 
   return (
     <div>
@@ -39,7 +44,7 @@ const Home = () => {
         <>
           <Genres onGenreSelect={(id) => setSelectedGenre(id)} />
           <div className="flex flex-wrap gap-4 m-4 items-center justify-center">
-            {movies.map((i) => (
+            {filteredMovies.map((i) => (
               <Movie key={i.id} movie={i} />
             ))}
           </div>
