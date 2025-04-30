@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Genres = () => {
+const Genres = ({ onGenreSelect }) => {
   const authorizationKey = import.meta.env.VITE_MOVIEDB_AUTH_KEY;
   const apiUrl = "https://api.themoviedb.org/3/genre/movie/list";
   const options = {
@@ -26,7 +26,7 @@ const Genres = () => {
     <div className="flex flex-wrap gap-2 m-4 justify-center items-center font-bold">
       {genreData.map((i) => (
         <div key={i.id}>
-          <h3>{i.name}</h3>
+          <h3 onClick={() => onGenreSelect(i.id)}>{i.name}</h3>
         </div>
       ))}
     </div>

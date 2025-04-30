@@ -8,6 +8,7 @@ import Genres from "../Components/Genres";
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedGenre, setSelectedGenre] = useState(null);
   const authorizationKey = import.meta.env.VITE_MOVIEDB_AUTH_KEY;
   const apiUrl = "https://api.themoviedb.org/3/discover/movie";
   const options = {
@@ -23,6 +24,7 @@ const Home = () => {
     // console.log(movieData.results);
     setMovies(movieData.results);
   };
+  console.log(selectedGenre);
 
   useEffect(() => {
     fetchMovieDate();
@@ -35,7 +37,7 @@ const Home = () => {
         <h1>Loading</h1>
       ) : (
         <>
-          <Genres />
+          <Genres onGenreSelect={(id) => setSelectedGenre(id)} />
           <div className="flex flex-wrap gap-4 m-4 items-center justify-center">
             {movies.map((i) => (
               <Movie key={i.id} movie={i} />
