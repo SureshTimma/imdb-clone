@@ -1,30 +1,16 @@
-import { useEffect } from "react";
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home.jsx";
+import PageNotFound from "./Pages/PageNotFound.jsx";
 
 function App() {
-  const authorizationKey = import.meta.env.VITE_MOVIEDB_AUTH_KEY;
-  const apiUrl = "https://api.themoviedb.org/3/discover/movie";
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${authorizationKey}`,
-    },
-  };
-
-  const fetchMovieDate = async () => {
-    let response = await fetch(apiUrl, options);
-    let movieData = await response.json();
-    console.log(movieData);
-  };
-
-  useEffect(() => {
-    fetchMovieDate();
-  });
-
   return (
-    <>
-      <h1 className="text-3xl">hello</h1>hello
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/*" element={<PageNotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
