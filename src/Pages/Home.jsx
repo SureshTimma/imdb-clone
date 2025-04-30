@@ -32,21 +32,21 @@ const Home = () => {
   useEffect(() => {
     fetchMovieDate();
     setIsLoading(false);
-    console.log(selectedGenre);
-    console.log(filteredMovies);
+    // console.log(selectedGenre);
+    // console.log(filteredMovies);
   }, [selectedGenre]);
 
   return (
     <div>
       {isLoading ? (
-        <h1>Loading</h1>
+        <h1 className="flex justify-center items-center">Loading</h1>
       ) : (
         <>
           <Genres onGenreSelect={(id) => setSelectedGenre(id)} />
           <div className="flex flex-wrap gap-4 m-4 items-center justify-center">
-            {filteredMovies.map((i) => (
-              <Movie key={i.id} movie={i} />
-            ))}
+            {filteredMovies.length !== 0
+              ? filteredMovies.map((i) => <Movie key={i.id} movie={i} />)
+              : "No Movies Found"}
           </div>
         </>
       )}

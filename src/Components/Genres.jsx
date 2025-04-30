@@ -26,7 +26,9 @@ const Genres = ({ onGenreSelect }) => {
     <div className="flex flex-wrap gap-2 m-4 justify-center items-center font-bold">
       {genreData.map((i) => (
         <div key={i.id}>
-          <h3 onClick={() => onGenreSelect(i.id)}>{i.name}</h3>
+          <h3 onClick={() => onGenreSelect(i.id)} className="cursor-pointer">
+            {i.name}
+          </h3>
         </div>
       ))}
     </div>
